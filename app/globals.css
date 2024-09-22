@@ -31,9 +31,101 @@ body {
     --radius: 0.5rem;
   }
 }
-
-#mynetwork {
-  /* width: 600px;
-  height: 400px; */
-  /* border: 1px solid lightgray; */
+#mynetwork  {
+  height: 100%; 
+  width: 100%;
 }
+#mynetwork_2 {
+  height: 100%; 
+  width: 100%;
+}
+
+.canvas_1{
+  height: 100vh;
+}
+.canvas_2{
+  height: 100vh;
+}
+
+ul li{
+  list-style: disc;
+}
+@media (min-width: 1081px) and (max-width: 1280px) {
+  .left-cont {
+    grid-column: span 4 / span 4; /* This makes left-cont span 6 columns */
+  }
+  .right-cont {
+    grid-column: span 8 / span 8; /* This makes right-cont span 6 columns */
+  }
+  .rebuild-btn-2{
+    display: none;
+  }
+}
+
+/* responsiveness between 768px and 1080px */
+@media (min-width: 768px) and (max-width: 1081px) {
+  .canvas_1 {
+    display: none;
+  }
+  .left-cont {
+    grid-column: span 5 / span 5; /* This makes left-cont span 6 columns */
+    height: fit-content;
+  }
+  .right-cont {
+    grid-column: span 7 / span 7; /* This makes right-cont span 6 columns */
+    height: fit-content;
+  }
+  .rebuild-btn-1{
+    display: none;
+  }
+  .instr-cont{
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+  }
+  .instr-cont ul{
+    padding-left: 14px;
+  }
+  .bottom-cont{
+    border-top: 1px solid gray;
+    width: 100vw;
+  }
+  .canvas_2{
+    height: 500px;
+  }
+}
+
+@media (min-width: 200px) and (max-width: 768px){
+  .canvas_1 {
+    display: none;
+  }
+  .left-cont {
+    grid-column: span 12 / span 12; /* This makes left-cont span 6 columns */
+    height: fit-content;
+  }
+  .right-cont {
+    grid-column: span 12 / span 12; /* This makes right-cont span 6 columns */
+    height: fit-content;
+  }
+  .rebuild-btn-1{
+    display: none;
+  }
+  .instr-cont{
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+  }
+  .instr-cont ul{
+    padding-left: 14px;
+  }
+  .bottom-cont{
+    border-top: 1px solid gray;
+    width: 100vw;
+  }
+  .canvas_2{
+    height: 500px;
+  }
+}
+
