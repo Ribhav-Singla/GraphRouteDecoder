@@ -36,8 +36,8 @@ export default function Home() {
     script.async = true;
     script.onload = () => {
       // create an array with nodes
-      //@ts-ignore
-      let nodes = new vis.DataSet(
+      //@ts-expect-error
+      const nodes = new vis.DataSet(
         graph.map((item) => {
           if (item.nodeValue) {
             return {
@@ -66,8 +66,8 @@ export default function Home() {
       }
 
       // create an array with edges
-      //@ts-ignore
-      let edges = new vis.DataSet(
+      //@ts-expect-error
+      const edges = new vis.DataSet(
         graph.flatMap((item) => {
           const destinations = item.edgeValue.split(",");
 
@@ -97,15 +97,15 @@ export default function Home() {
       );
 
       // create a network
-      let container = document.getElementById("mynetwork");
-      let container2 = document.getElementById("mynetwork_2");
+      const container = document.getElementById("mynetwork");
+      const container2 = document.getElementById("mynetwork_2");
 
       // provide the data in the vis format
-      let data = {
+      const data = {
         nodes: nodes,
         edges: edges,
       };
-      let options = {
+      const options = {
         physics: {
           enabled: true,
           barnesHut: {
@@ -122,9 +122,9 @@ export default function Home() {
       };
 
       // initialize your network!
-      //@ts-ignore
+      //@ts-expect-error
       new vis.Network(container, data, options);
-      //@ts-ignore
+      //@ts-expect-error
       new vis.Network(container2, data, options);
 
       // Animation of the path movement
