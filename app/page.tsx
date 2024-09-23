@@ -146,13 +146,9 @@ export default function Home() {
             },
             {
               id: nextNode,
-              shape: "icon",
-              icon: {
-                face: "FontAwesome",
-                code: "\uf183",
-                size: 30,
-                color: step + 1 == path.length - 1 ? "red" : "green",
-              },
+              shape: "image",
+              image : step + 1 == path.length - 1 ? "/final_marker.png" : "/marker.png",
+              size: step + 1 == path.length - 1 ? 25 : 15,
               font: {
                 color: "black",
               },
