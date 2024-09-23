@@ -36,7 +36,7 @@ export default function Home() {
     script.async = true;
     script.onload = () => {
       // create an array with nodes
-      //@ts-expect-error
+       // @ts-expect-error: vis.DataSet type is not recognized, external library usage
       const nodes = new vis.DataSet(
         graph.map((item) => {
           if (item.nodeValue) {
@@ -66,7 +66,7 @@ export default function Home() {
       }
 
       // create an array with edges
-      //@ts-expect-error
+      // @ts-expect-error: vis.DataSet type is not recognized for edges, external library usage
       const edges = new vis.DataSet(
         graph.flatMap((item) => {
           const destinations = item.edgeValue.split(",");
@@ -122,9 +122,9 @@ export default function Home() {
       };
 
       // initialize your network!
-      //@ts-expect-error
+      // @ts-expect-error: External library vis.Network type not recognized
       new vis.Network(container, data, options);
-      //@ts-expect-error
+      // @ts-expect-error: External library vis.Network type not recognized
       new vis.Network(container2, data, options);
 
       // Animation of the path movement
