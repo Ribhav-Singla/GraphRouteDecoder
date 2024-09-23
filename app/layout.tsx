@@ -15,7 +15,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "GraphRouteDecoder",
+  title: "GraphRoute Decoder",
   description: "Made by Ribhav Singla",
 };
 
