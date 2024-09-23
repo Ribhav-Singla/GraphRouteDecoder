@@ -12,7 +12,6 @@ import { motion } from "framer-motion";
 import Footer from "./(components)/footer";
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
   const [rebuild, setReBuild] = useState(false);
   const graph = useRecoilValue(graphState);
   const source = useRecoilValue(sourceState);
@@ -38,7 +37,7 @@ export default function Home() {
     script.onload = () => {
       // create an array with nodes
       //@ts-ignore
-      var nodes = new vis.DataSet(
+      let nodes = new vis.DataSet(
         graph.map((item) => {
           if (item.nodeValue) {
             return {
@@ -68,14 +67,14 @@ export default function Home() {
 
       // create an array with edges
       //@ts-ignore
-      var edges = new vis.DataSet(
-        graph.flatMap((item, index) => {
-          let destinations = item.edgeValue.split(",");
+      let edges = new vis.DataSet(
+        graph.flatMap((item) => {
+          const destinations = item.edgeValue.split(",");
 
-          return destinations.map((dest, destIndex) => {
-            let destinationNodeMatch = dest.match(/[A-Za-z]+/);
-            let weightMatch = dest.match(/\d+/);
-            let destination_node_index = find_index(
+          return destinations.map((dest) => {
+            const destinationNodeMatch = dest.match(/[A-Za-z]+/);
+            const weightMatch = dest.match(/\d+/);
+            const destination_node_index = find_index(
               destinationNodeMatch ? destinationNodeMatch[0].trim() : ""
             );
 
@@ -98,15 +97,15 @@ export default function Home() {
       );
 
       // create a network
-      var container = document.getElementById("mynetwork");
-      var container2 = document.getElementById("mynetwork_2");
+      let container = document.getElementById("mynetwork");
+      let container2 = document.getElementById("mynetwork_2");
 
       // provide the data in the vis format
-      var data = {
+      let data = {
         nodes: nodes,
         edges: edges,
       };
-      var options = {
+      let options = {
         physics: {
           enabled: true,
           barnesHut: {

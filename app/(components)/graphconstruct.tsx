@@ -45,7 +45,7 @@ function Graphconstruct() {
     if (value.trim() == "") {
       return true;
     }
-    let check = /^[A-Z]?$/.test(value);
+    const check = /^[A-Z]?$/.test(value);
     if (!check) return false;
 
     // checking if the value is present in the node of the graph or not
