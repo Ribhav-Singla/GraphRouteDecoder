@@ -9,6 +9,7 @@ import { distanceState } from "./(recoil)";
 import { pathState } from "./(recoil)";
 import { useRecoilValue } from "recoil";
 import { motion } from "framer-motion";
+import Footer from "./(components)/footer";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -187,48 +188,13 @@ export default function Home() {
   }, [rebuild, graph, source, dest, path]);
 
   return (
-    <div className="grid grid-cols-12 h-screen">
-      <div className="left-cont xl:col-span-3 border-e-2 border-gray-300">
-        <motion.h1
-         initial={{
-          opacity: 0,
-          y: -50,
-          scale: 0.5,
-        }}
-        animate={{
-          opacity: 1,
-          y: 0,
-          scale: 1,
-        }}
-        transition={{
-          duration: 0.5,
-        }}
-         className="text-2xl p-5 border-b-2 border-gray-300 font-bold">
-          <span className="bg-slate-300 p-2 rounded-s-md">GraphRoute</span>
-          <span className="bg-black text-white p-2 rounded-e-md">Decoder</span>
-        </motion.h1>
-        <Graphconstruct />
-        <div className="p-5">
-          <p>
-            <strong>
-              <span className="text-blue-600">Shortest Path: </span>{" "}
-              {path.join(" ")}
-            </strong>
-          </p>
-          <p>
-            <strong>
-              <span className="text-blue-600">Shortest Distance:</span>{" "}
-              {distance} units
-            </strong>
-          </p>
-        </div>
-      </div>
-      <div className="right-cont xl:col-span-9 h-screen">
-        <div className="flex p-3 justify-between">
-          <motion.div
+    <div className="flex flex-col">
+      <div className="grid grid-cols-12 h-screen flex-1">
+        <div className="left-cont xl:col-span-3 border-e-2 border-gray-300">
+          <motion.h1
             initial={{
               opacity: 0,
-              y: 50,
+              y: -50,
               scale: 0.5,
             }}
             animate={{
@@ -239,55 +205,96 @@ export default function Home() {
             transition={{
               duration: 0.5,
             }}
-            className="instr-cont flex justify-center gap-10 border p-4 border-gray-400 rounded text-left select-none bg-[#ededed] z-10"
+            className="text-2xl p-5 border-b-2 border-gray-300 font-bold"
           >
-            <div className="lg:w-[300px] xl:w-[450px]">
-              <h1 className="font-bold text-red-500">Instructions*</h1>
-              <ul className="ps-3">
-                <li>
-                  Every node in the edge list must have a corresponding node.
-                </li>
-                <li>
-                  Enter edge in the form of comma separated {"(node weight)"}.
-                </li>
-                <li>
-                  <strong>Source</strong> & <strong>Destination</strong> must be
-                  a node.
-                </li>
-              </ul>
-            </div>
-            <div className="">
-              <h1 className="font-bold text-red-500">Fun tips*</h1>
-              <ul>
-                <li>You can move nodes with pointer.</li>
-                <li>You zoom in-out graph.</li>
-              </ul>
-            </div>
-          </motion.div>
-          <Button
-            className="rebuild-btn-1"
-            onClick={() => setReBuild(!rebuild)}
-          >
-            Rebuild
-          </Button>
+            <span className="bg-slate-300 p-2 rounded-s-md">GraphRoute</span>
+            <span className="bg-black text-white p-2 rounded-e-md">
+              Decoder
+            </span>
+          </motion.h1>
+          <Graphconstruct />
+          <div className="p-5">
+            <p>
+              <strong>
+                <span className="text-blue-600">Shortest Path: </span>{" "}
+                {path.join(" ")}
+              </strong>
+            </p>
+            <p>
+              <strong>
+                <span className="text-blue-600">Shortest Distance:</span>{" "}
+                {distance} units
+              </strong>
+            </p>
+          </div>
         </div>
-        <div className="canvas_1">
-          <div id="mynetwork"></div>
+        <div className="right-cont xl:col-span-9 h-screen ">
+          <div className="flex p-3 justify-between">
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 50,
+                scale: 0.5,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+              }}
+              transition={{
+                duration: 0.5,
+              }}
+              className="instr-cont flex justify-center gap-10 border p-4 border-gray-400 rounded text-left select-none bg-[#ededed] z-10"
+            >
+              <div className="lg:w-[300px] xl:w-[450px]">
+                <h1 className="font-bold text-red-500">Instructions*</h1>
+                <ul className="ps-3">
+                  <li>
+                    Every node in the edge list must have a corresponding node.
+                  </li>
+                  <li>
+                    Enter edge in the form of comma separated {"(node weight)"}.
+                  </li>
+                  <li>
+                    <strong>Source</strong> & <strong>Destination</strong> must
+                    be a node.
+                  </li>
+                </ul>
+              </div>
+              <div className="">
+                <h1 className="font-bold text-red-500">Fun tips*</h1>
+                <ul>
+                  <li>You can move nodes with pointer.</li>
+                  <li>You zoom in-out graph.</li>
+                </ul>
+              </div>
+            </motion.div>
+            <Button
+              className="rebuild-btn-1"
+              onClick={() => setReBuild(!rebuild)}
+            >
+              Rebuild
+            </Button>
+          </div>
+          <div className="canvas_1">
+            <div id="mynetwork"></div>
+          </div>
+        </div>
+        <div className="bottom-cont">
+          <div className="flex justify-center items-center p-5">
+            <Button
+              className="rebuild-btn-2 xl:hidden"
+              onClick={() => setReBuild(!rebuild)}
+            >
+              Rebuild
+            </Button>
+          </div>
+          <div className="canvas_2">
+            <div id="mynetwork_2"></div>
+          </div>
         </div>
       </div>
-      <div className="bottom-cont">
-        <div className="flex justify-center items-center p-5">
-          <Button
-            className="rebuild-btn-2 xl:hidden"
-            onClick={() => setReBuild(!rebuild)}
-          >
-            Rebuild
-          </Button>
-        </div>
-        <div className="canvas_2">
-          <div id="mynetwork_2"></div>
-        </div>
-      </div>
+      <Footer />
     </div>
   );
 }

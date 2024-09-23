@@ -50,6 +50,37 @@ body {
 ul li{
   list-style: disc;
 }
+
+@media (min-width: 1081px){
+  .canvas_2{
+    display: none;
+  }
+  .right-cont {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full height of the screen */
+    overflow: hidden; /* Prevent overflow scrolling */
+  }
+  
+  .instr-cont {
+    flex-shrink: 0; /* Prevent shrinking */
+    height: 155px; /* Set a fixed height */
+  }
+  
+  .canvas_1 {
+    flex-grow: 1; /* Take up remaining space */
+    height: auto; /* Allow the height to be flexible */
+    overflow: hidden; /* Prevent internal scrolling */
+  }
+  
+  @mixin {
+    canvas_1 {
+      height: auto;
+    }
+  }
+  
+}
+
 @media (min-width: 1081px) and (max-width: 1280px) {
   .left-cont {
     grid-column: span 4 / span 4; /* This makes left-cont span 6 columns */
@@ -59,6 +90,9 @@ ul li{
   }
   .rebuild-btn-2{
     display: none;
+  }
+  .instr-cont{
+    height: 202px;
   }
 }
 
@@ -129,3 +163,4 @@ ul li{
   }
 }
 
+/* fix */
