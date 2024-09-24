@@ -18,6 +18,7 @@ export default function Home() {
   const dest = useRecoilValue(destState);
   const distance = useRecoilValue(distanceState);
   const path = useRecoilValue(pathState);
+  let network: any;
 
   useEffect(() => {
     const loadFontAwesome = () => {
@@ -36,7 +37,7 @@ export default function Home() {
     script.async = true;
     script.onload = () => {
       // create an array with nodes
-       // @ts-expect-error: vis.DataSet type is not recognized, external library usage
+      // @ts-expect-error: vis.DataSet type is not recognized, external library usage
       const nodes = new vis.DataSet(
         graph.map((item) => {
           if (item.nodeValue) {
@@ -123,9 +124,25 @@ export default function Home() {
 
       // initialize your network!
       // @ts-expect-error: External library vis.Network type not recognized
-      new vis.Network(container, data, options);
+      const network1 = new vis.Network(container, data, options);
       // @ts-expect-error: External library vis.Network type not recognized
-      new vis.Network(container2, data, options);
+      const network2 = new vis.Network(container2, data, options);
+
+      network1.on("afterDrawing", function (ctx: any) {
+        var dataURL = ctx.canvas.toDataURL();
+        const canvasImg = document.getElementById("canvasImg");
+        if (canvasImg) {
+          (canvasImg as HTMLAnchorElement).href = dataURL;
+        }
+      });
+
+      network2.on("afterDrawing", function (ctx: any) {
+        var dataURL = ctx.canvas.toDataURL();
+        const canvasImg = document.getElementById("canvasImg");
+        if (canvasImg) {
+          (canvasImg as HTMLAnchorElement).href = dataURL;
+        }
+      });
 
       // Animation of the path movement
       let step = 0;
@@ -147,7 +164,10 @@ export default function Home() {
             {
               id: nextNode,
               shape: "image",
-              image : step + 1 == path.length - 1 ? "/final_marker.png" : "/marker.png",
+              image:
+                step + 1 == path.length - 1
+                  ? "/final_marker.png"
+                  : "/marker.png",
               size: step + 1 == path.length - 1 ? 25 : 15,
               font: {
                 color: "black",
@@ -181,6 +201,15 @@ export default function Home() {
       document.body.removeChild(script);
     };
   }, [rebuild, graph, source, dest, path]);
+
+  const downloadGraph = () => {
+    const canvas = network.canvas.frame.canvas; // Get the canvas from the network
+    const image = canvas.toDataURL("image/png"); // Convert canvas to data URL
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "graph.png"; // Set the download name
+    link.click(); // Trigger download
+  };
 
   return (
     <div className="flex flex-col">
@@ -264,12 +293,26 @@ export default function Home() {
                 </ul>
               </div>
             </motion.div>
-            <Button
-              className="rebuild-btn-1"
-              onClick={() => setReBuild(!rebuild)}
-            >
-              Rebuild
-            </Button>
+            <div className="flex flex-col gap-5">
+              <Button
+                className="rebuild-btn-1"
+                onClick={() => setReBuild(!rebuild)}
+              >
+                Rebuild
+              </Button>
+              <Button
+                onClick={() => {
+                  const canvasImg = document.getElementById("canvasImg");
+                  if (canvasImg) {
+                    (canvasImg as HTMLAnchorElement).click();
+                  }
+                }}
+              >
+                Save Image
+              </Button>
+
+              <a id="canvasImg" download="graph"></a>
+            </div>
           </div>
           <div className="canvas_1">
             <div id="mynetwork"></div>
