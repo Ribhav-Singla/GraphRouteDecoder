@@ -92,7 +92,10 @@ ul li{
   .right-cont {
     grid-column: span 8 / span 8; /* This makes right-cont span 6 columns */
   }
-  .rebuild-btn-2{
+  .rebuild-btn-2 {
+    display: none;
+  }
+  .save-img-2{
     display: none;
   }
   .instr-cont{

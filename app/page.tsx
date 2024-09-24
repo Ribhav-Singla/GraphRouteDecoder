@@ -18,7 +18,6 @@ export default function Home() {
   const dest = useRecoilValue(destState);
   const distance = useRecoilValue(distanceState);
   const path = useRecoilValue(pathState);
-  let network: any;
 
   useEffect(() => {
     const loadFontAwesome = () => {
@@ -202,14 +201,6 @@ export default function Home() {
     };
   }, [rebuild, graph, source, dest, path]);
 
-  const downloadGraph = () => {
-    const canvas = network.canvas.frame.canvas; // Get the canvas from the network
-    const image = canvas.toDataURL("image/png"); // Convert canvas to data URL
-    const link = document.createElement("a");
-    link.href = image;
-    link.download = "graph.png"; // Set the download name
-    link.click(); // Trigger download
-  };
 
   return (
     <div className="flex flex-col">
@@ -333,6 +324,7 @@ export default function Home() {
                     (canvasImg as HTMLAnchorElement).click();
                   }
                 }}
+                className="save-img-2 xl:hidden"
               >
                 Save Image
               </Button>
