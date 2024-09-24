@@ -73,6 +73,10 @@ ul li{
     overflow: hidden; /* Prevent internal scrolling */
   }
   
+  .rebuild-btn-1{
+    padding-inline: 5px;
+  }
+
   @mixin {
     canvas_1 {
       height: auto;

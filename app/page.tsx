@@ -128,16 +128,16 @@ export default function Home() {
       // @ts-expect-error: External library vis.Network type not recognized
       const network2 = new vis.Network(container2, data, options);
 
-      network1.on("afterDrawing", function (ctx: any) {
-        var dataURL = ctx.canvas.toDataURL();
+      network1.on("afterDrawing", function (ctx: CanvasRenderingContext2D) {
+        const dataURL = ctx.canvas.toDataURL();
         const canvasImg = document.getElementById("canvasImg");
         if (canvasImg) {
           (canvasImg as HTMLAnchorElement).href = dataURL;
         }
       });
 
-      network2.on("afterDrawing", function (ctx: any) {
-        var dataURL = ctx.canvas.toDataURL();
+      network2.on("afterDrawing", function (ctx: CanvasRenderingContext2D) {
+        const dataURL = ctx.canvas.toDataURL();
         const canvasImg = document.getElementById("canvasImg");
         if (canvasImg) {
           (canvasImg as HTMLAnchorElement).href = dataURL;
@@ -293,9 +293,9 @@ export default function Home() {
                 </ul>
               </div>
             </motion.div>
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5 rebuild-btn-1">
               <Button
-                className="rebuild-btn-1"
+                className=""
                 onClick={() => setReBuild(!rebuild)}
               >
                 Rebuild
@@ -319,13 +319,25 @@ export default function Home() {
           </div>
         </div>
         <div className="bottom-cont">
-          <div className="flex justify-center items-center p-5">
+          <div className="flex justify-center items-center p-5 gap-10">
             <Button
               className="rebuild-btn-2 xl:hidden"
               onClick={() => setReBuild(!rebuild)}
             >
               Rebuild
             </Button>
+            <Button
+                onClick={() => {
+                  const canvasImg = document.getElementById("canvasImg");
+                  if (canvasImg) {
+                    (canvasImg as HTMLAnchorElement).click();
+                  }
+                }}
+              >
+                Save Image
+              </Button>
+
+              <a id="canvasImg" download="graph"></a>
           </div>
           <div className="canvas_2">
             <div id="mynetwork_2"></div>
