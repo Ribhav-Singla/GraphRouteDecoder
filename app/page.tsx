@@ -78,8 +78,6 @@ export default function Home() {
               destinationNodeMatch ? destinationNodeMatch[0].trim() : ""
             );
 
-            console.log("edge vector:", `${item.id}-${destination_node_index}`);
-
             return {
               id: `${item.id}-${destination_node_index}`,
               from: item.id,
@@ -149,7 +147,6 @@ export default function Home() {
         if (step < path.length - 1) {
           const currentNode = find_index(path[step]);
           const nextNode = find_index(path[step + 1]);
-          console.log("cur: ", currentNode, nextNode);
 
           // Move image to the next node
           nodes.update([
